@@ -21,14 +21,6 @@
   "resultRowTitle": "Health Results",
   "resultBoxes": [
     {
-      "text": "Node Id",
-      "suffix": " 🔑"
-    },
-    {
-      "text": "Account Address",
-      "suffix": " 📩"
-    },
-    {
       "text": "Block Height",
       "suffix": " 🏗️"
     },
@@ -37,28 +29,16 @@
       "suffix": " 👥"
     },
     {
-      "text": "Probability Of Availability",
-      "suffix": " 🎲"
+      "text": "Latest Block Hash",
+      "suffix": " 📩"
     },
     {
-      "text": "DAS Running",
+      "text": "State Root Hash",
       "suffix": " 🏃"
     },
     {
-      "text": "DAS Catch Up Status",
-      "suffix": " 💓"
-    },
-    {
-      "text": "DAS Head of Catchup",
-      "suffix": " 🚀"
-    },
-    {
-      "text": "DAS Head of Sampled Chain",
-      "suffix": " 🌟"
-    },
-    {
-      "text": "API Version",
-      "suffix": " 📜"
+      "text": "Peers details",
+      "suffix": " 🎲"
     }
   ]
 }

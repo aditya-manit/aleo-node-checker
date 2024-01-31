@@ -1,16 +1,11 @@
 import {CallRpcWithPayload} from "../call-rpc-with-payload";
 
 async function processData(data) {
-    return parseFloat(data.result).toFixed(2)
+    return data
 }
 
 export async function getProbabilityOfAvailability(endpoint, port, token) {
-    const requestData = {
-        "id": 1,
-        "jsonrpc": "2.0",
-        "method": "share.ProbabilityOfAvailability",
-        "params": []
-    }
-    const data = await CallRpcWithPayload(endpoint, port, token, requestData)
+    const path = "/testnet3/peers/all/metrics"
+    const data = await CallRpcWithPayload(endpoint, port, token, path)
     return await processData(data);
 }

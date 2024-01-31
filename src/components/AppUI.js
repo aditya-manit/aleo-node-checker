@@ -54,7 +54,7 @@ export function ReturnApp(props) {
                         suffix={box.suffix}
                         text={box.text}
                         color={getColor()}
-                        large={index < 2} // Pass 'large' prop as true for the first two boxes
+                        large={index >= 2} // Pass 'large' prop as true for the first two boxes
                     />
                 ))}
             </div>

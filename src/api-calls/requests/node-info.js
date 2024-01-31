@@ -1,16 +1,11 @@
 import {CallRpcWithPayload} from "../call-rpc-with-payload";
 
 async function processData(data) {
-    return data.result.api_version
+    return data
 }
 
 export async function getNodeInfo(endpoint, port, token) {
-    const requestData = {
-        "id": 1,
-        "jsonrpc": "2.0",
-        "method": "node.Info",
-        "params": []
-    }
-    const data = await CallRpcWithPayload(endpoint, port, token, requestData)
+    const path = "/testnet3/latest/stateRoot"
+    const data = await CallRpcWithPayload(endpoint, port, token, path)
     return await processData(data);
 }

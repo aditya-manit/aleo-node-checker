@@ -1,16 +1,11 @@
 import {CallRpcWithPayload} from "../call-rpc-with-payload";
 
 async function processData(data) {
-    return data.result
+    return data
 }
 
 export async function getAccountAddress(endpoint, port, token) {
-    const requestData = {
-        "id": 1,
-        "jsonrpc": "2.0",
-        "method": "state.AccountAddress",
-        "params": []
-    }
-    const data = await CallRpcWithPayload(endpoint, port, token, requestData)
+    const path = "/testnet3/latest/hash"
+    const data = await CallRpcWithPayload(endpoint, port, token, path)
     return await processData(data);
 }

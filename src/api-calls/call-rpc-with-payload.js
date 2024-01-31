@@ -1,15 +1,15 @@
-export async function CallRpcWithPayload(endpoint, port, token, requestData) {
+export async function CallRpcWithPayload(endpoint, port, token, path) {
     if (!endpoint.startsWith("http")) {
         endpoint = "http://" + endpoint;
     }
 
-    const url = `https://cors-proxy.kingsuper.services/?targetApi=${encodeURIComponent(`${endpoint}:${port}`)}`;
+    const url = `https://cors-proxy.kingsuper.services/?targetApi=${encodeURIComponent(`${endpoint}:${port}${path}`)}`;
 
 
     const options = {
-        method: "POST", headers: {
-            "Content-Type": "application/json", Authorization: `Bearer ${token}`,
-        }, body: JSON.stringify(requestData),
+        method: "GET", headers: {
+            "Content-Type": "application/json",
+        }
     };
 
 

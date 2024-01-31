@@ -10,6 +10,7 @@ import {getSamplingStats} from "./api-calls/requests/daser-sampling-stats";
 import {getAccountAddress} from "./api-calls/requests/state-account-address";
 import {getProbabilityOfAvailability} from "./api-calls/requests/share-probability-of-availability";
 import {getNodeInfo} from "./api-calls/requests/node-info";
+import {jsonToHtml} from "./helper/pretty-print-json";
 
 function App() {
     const [loadOnClick, setLoadOnClick] = useState(false);
@@ -51,7 +52,7 @@ function App() {
 
     const computeResults = async () => {
         console.log('loading');
-        let {ipAddress, port, authToken} = readInput();
+        let {ipAddress, port} = readInput();
 
         // todo: remove this: testing purpose
         // ipAddress = "165.232.182.75"
@@ -59,9 +60,9 @@ function App() {
         // authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBbGxvdyI6WyJwdWJsaWMiLCJyZWFkIiwid3JpdGUiLCJhZG1pbiJdfQ.6Vt55wvPNw1uk5z0NB4ufPj-IOnR77pG7i0LjwtRkOU"
 
 
-        console.log(ipAddress, port, authToken)
+        console.log(ipAddress, port)
 
-        if (!ipAddress || !port || !authToken) {
+        if (!ipAddress || !port) {
             handleError(config.missingValuesMessage);
             return;
         }
@@ -69,39 +70,40 @@ function App() {
         try {
             const [
                 peerCount,
-                info,
+                // info,
                 localHead,
-                samplingStats,
-                // balance,
+                // samplingStats,
                 accountAddress,
-                // resourceState,
                 probabilityOfAvailability,
                 apiVersion
             ] = await Promise.all([
-                getPeers(ipAddress, port, authToken),
-                getP2pInfo(ipAddress, port, authToken),
-                getLocalHead(ipAddress, port, authToken),
-                getSamplingStats(ipAddress, port, authToken),
-
-                // getBalance(ipAddress, port, authToken),
-                getAccountAddress(ipAddress, port, authToken),
-                // getResourceState(ipAddress, port, authToken),
-                getProbabilityOfAvailability(ipAddress, port, authToken),
-                getNodeInfo(ipAddress, port, authToken)
+                getPeers(ipAddress, port, "authToken"),
+                // getP2pInfo(ipAddress, port, "authToken"),
+                getLocalHead(ipAddress, port, "authToken"),
+                // getSamplingStats(ipAddress, port, "authToken"),
+                getAccountAddress(ipAddress, port, "authToken"),
+                getProbabilityOfAvailability(ipAddress, port, "authToken"),
+                getNodeInfo(ipAddress, port, "authToken")
             ]);
 
+            console.log(`peerCount: ${peerCount}`);
+            console.log(`localHead: ${localHead}`);
+            console.log(`accountAddress: ${accountAddress}`);
+            console.log(`probabilityOfAvailability: ${probabilityOfAvailability}`);
+            console.log(`apiVersion: ${apiVersion}`);
 
-            console.log(`peerCount: ${peerCount}`)
-
-            if ([peerCount, info, localHead, accountAddress, probabilityOfAvailability, samplingStats, apiVersion].some((value) => value === null || value === undefined || Number.isNaN(value))) {
+            if ([peerCount, localHead, accountAddress, probabilityOfAvailability, apiVersion].some((value) => value === null || value === undefined || Number.isNaN(value))) {
                 handleError(config.backend.apiFailureMessage);
                 return;
             }
 
-            updateUI(peerCount, info, localHead, accountAddress, probabilityOfAvailability, samplingStats, apiVersion);
+            const uiResponsePrettyJson = await jsonToHtml(probabilityOfAvailability);
+
+            updateUI(peerCount, localHead, accountAddress, apiVersion, uiResponsePrettyJson)
             removeLoadingClass();
             setLoadOnClick(true);
         } catch (e) {
+            console.error('Error:', e);
             console.log(config.backend.apiFailureMessage)
             handleError(config.backend.apiFailureMessage);
         }
@@ -111,9 +113,8 @@ function App() {
     const readInput = () => {
         const ipAddress = document.getElementById('field-0').value;
         const port = document.getElementById('field-1').value;
-        const authToken = document.getElementById('field-2').value;
 
-        return {ipAddress, port, authToken};
+        return {ipAddress, port};
     };
 
     const handleError = (message) => {
@@ -121,17 +122,13 @@ function App() {
         removeLoadingClass();
     };
 
-    const updateUI = (peerCount, info, localHead, accountAddress, probabilityOfAvailability, samplingStats, apiVersion) => {
-        document.getElementById('resultBox-0').innerHTML = info
-        document.getElementById('resultBox-1').innerHTML = accountAddress
-        document.getElementById('resultBox-2').innerHTML = localHead
-        document.getElementById('resultBox-3').innerHTML = peerCount
-        document.getElementById('resultBox-4').innerHTML = probabilityOfAvailability
-        document.getElementById('resultBox-5').innerHTML = samplingStats.isRunning
-        document.getElementById('resultBox-6').innerHTML = samplingStats.catchUpStatus
-        document.getElementById('resultBox-7').innerHTML = samplingStats.headOfCatchup
-        document.getElementById('resultBox-8').innerHTML = samplingStats.headOfSampledChain
-        document.getElementById('resultBox-9').innerHTML = apiVersion
+    const updateUI = (peerCount, blockHeight, blockHash, stateRootHash, allPeers) => {
+        document.getElementById('resultBox-0').innerHTML = blockHeight
+        document.getElementById('resultBox-1').innerHTML = peerCount
+        document.getElementById('resultBox-2').innerHTML = blockHash
+        document.getElementById('resultBox-3').innerHTML = stateRootHash
+        document.getElementById('resultBox-4').innerHTML = allPeers
+
     };
 
     return (<ReturnApp load={load} config={config}/>);
