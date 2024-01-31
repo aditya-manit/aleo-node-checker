@@ -1,30 +1,29 @@
-# Aleo Node checker
+# Aleo Node Checker
 
-## Run App
+## Run the Application
+To start using the Aleo Node Checker, simply follow these steps:
 ```bash
 npm install
 npm run start
 ```
 
-# Preview and features
+# Overview and Features
 
-- **Node IP, REST API, Read Auth Token**: These input fields allow users to specify the Aleo Node they want to check. This signifies that the tool can be used to check the health of any Aleo Node, providing flexibility to the user.
+The Aleo Node Checker is a versatile and user-friendly tool designed to assess the health and status of any Aleo Node. Here are its key features:
 
-- **Check Health Button**: This button initiates the health check process. It's a user-friendly feature that allows obtaining a lot of information quickly and efficiently.
+- **Node IP and REST API Port**: These fields enable users to connect to any Aleo Node by entering its IP address and REST API port number. This flexibility is crucial for a tool that's meant to service various nodes across the network.
 
-- **Node Id and Account Address**: These results provide the basic identifiers for the node. They are useful for verification and record-keeping purposes.
+- **Block Height**: Displayed in the health results, this important metric informs users about the current block height of the node, indicating whether the node is synchronized with the latest blockchain data.
 
-- **Block Height**: This metric tells users how up-to-date the node is. If the block height is lower than the current highest block, it indicates that the node is not fully synced and may not have the latest transactions.
+- **Number Of Peers Connected**: This metric, also part of the health results, shows the number of peers connected to the node. A higher number suggests better connectivity and reliability in the network.
 
-- **Number Of Peers Connected**: This shows the node's connectivity. A well-connected node is more likely to stay up-to-date and less likely to miss transactions, contributing to the overall network robustness.
+- **Latest Block Hash**: This result provides the hash of the most recent block processed by the node, offering an additional layer of verification and insight into the node's current state.
 
-- **Probability Of Availability**: This is a measure of the node's reliability. It might be calculated based on past uptime, response times, or other metrics. This information is crucial for ensuring a reliable network.
+- **State Root Hash**: Representing the current state of the node, this hash is a crucial piece of information for understanding the node's integrity and consistency with the blockchain.
 
-- **DAS Running, DAS Catch Up Status, DAS Head of Catchup, DAS Head of Sampled Chain**: These metrics related to the Data Availability Sampling (DAS) protocol are critical for ensuring that data is available and can be retrieved by any node in the network. These detailed metrics can help identify potential issues.
+- **Peers Details**: This feature provides detailed information about each peer connected to the node, offering insights into the node's network environment and its interactions with other nodes.
 
-- **API Version**: This is the version of the Celestia API that the node is running. It's important for compatibility with other nodes and applications, ensuring smooth communication in the network.
-
-In conclusion, the Aleo Node Checker provides a comprehensive overview of a node's health and status, which can help node operators monitor their nodes and troubleshoot potential issues. Its user-friendly and flexible design makes it a useful tool for anyone involved in the Celestia network.
+The Aleo Node Checker is a valuable tool for node operators and network participants. It offers a comprehensive view of a node's health and status, assisting in monitoring, maintenance, and troubleshooting. Its intuitive design and detailed reporting make it an essential tool for anyone involved in the Aleo network.
 
 ![](images/before.png)
 ![](images/after.png)
