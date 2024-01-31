@@ -1,5 +1,5 @@
 {
-  "appTitle": "Celestia Node Health Checker",
+  "appTitle": "Aleo Node Health Checker",
   "backend": {
     "apiFailureMessage": "Unable to reach the node"
   },
@@ -12,16 +12,10 @@
       "hoverText": "Enter the IP address of the node"
     },
     {
-      "label": "RPC Port",
+      "label": "REST API Port",
       "type": "number",
       "icon": "fa-plug",
-      "hoverText": "Enter the RPC port number for the node"
-    },
-    {
-      "label": "Read Auth Token",
-      "type": "text",
-      "icon": "fa-key",
-      "hoverText": "Enter the read authorization token for the node"
+      "hoverText": "Enter the REST API Port number for the node"
     }
   ],
   "resultRowTitle": "Health Results",

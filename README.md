@@ -1,4 +1,4 @@
-# Celestia Node checker
+# Aleo Node checker
 
 ## Run App
 ```bash
@@ -8,7 +8,7 @@ npm run start
 
 # Preview and features
 
-- **Node IP, RPC Port, Read Auth Token**: These input fields allow users to specify the Celestia node they want to check. This signifies that the tool can be used to check the health of any Celestia node, providing flexibility to the user.
+- **Node IP, REST API, Read Auth Token**: These input fields allow users to specify the Aleo Node they want to check. This signifies that the tool can be used to check the health of any Aleo Node, providing flexibility to the user.
 
 - **Check Health Button**: This button initiates the health check process. It's a user-friendly feature that allows obtaining a lot of information quickly and efficiently.
 
@@ -24,7 +24,7 @@ npm run start
 
 - **API Version**: This is the version of the Celestia API that the node is running. It's important for compatibility with other nodes and applications, ensuring smooth communication in the network.
 
-In conclusion, the Celestia Node Checker provides a comprehensive overview of a node's health and status, which can help node operators monitor their nodes and troubleshoot potential issues. Its user-friendly and flexible design makes it a useful tool for anyone involved in the Celestia network.
+In conclusion, the Aleo Node Checker provides a comprehensive overview of a node's health and status, which can help node operators monitor their nodes and troubleshoot potential issues. Its user-friendly and flexible design makes it a useful tool for anyone involved in the Celestia network.
 
 ![](images/before.png)
 ![](images/after.png)
